@@ -1,0 +1,27 @@
+obj_xjit#:#Jitsi
+obj_xjit_duplicate#:#Copy Jitsi
+objs_xjit#:#Jitsi's
+objs_xjit_duplicate#:#Copy Jitsi's
+rbac_create_xjit#:#Create Jitsi
+xjit_add#:#Add
+xjit_delete#:#Delete
+xjit_edit_permission#:#Edit permission
+xjit_new#:#Create Jitsi
+xjit_read#:#Read
+xjit_visible#:#visible
+xjit_write#:#Edit
+config_configuration#:#Configuration
+config_configuration_saved#:#Configuration saved
+config_save#:#Save
+object_manage_contents#:#Edit
+object_offline#:#Offline
+object_permission_denied#:#Permission denied
+object_show_contents#:#Contents
+object_status#:#Status
+settings_cancel#:#Cancel
+settings_description#:#Description
+settings_online#:#Online
+settings_save#:#Save
+settings_saved#:#Settings saved
+settings_settings#:#Settings
+settings_title#:#Title

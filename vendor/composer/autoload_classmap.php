@@ -124,6 +124,7 @@ return array(
     'srag\\Plugins\\Jitsi\\Config\\ConfigFormGUI' => $baseDir . '/src/Config/ConfigFormGUI.php',
     'srag\\Plugins\\Jitsi\\Config\\Factory' => $baseDir . '/src/Config/Factory.php',
     'srag\\Plugins\\Jitsi\\Config\\Repository' => $baseDir . '/src/Config/Repository.php',
+    'srag\\Plugins\\Jitsi\\Jitsi\\Config' => $baseDir . '/src/Jitsi/Config.php',
     'srag\\Plugins\\Jitsi\\ObjectSettings\\Factory' => $baseDir . '/src/ObjectSettings/Factory.php',
     'srag\\Plugins\\Jitsi\\ObjectSettings\\ObjectSettings' => $baseDir . '/src/ObjectSettings/ObjectSettings.php',
     'srag\\Plugins\\Jitsi\\ObjectSettings\\ObjectSettingsFormGUI' => $baseDir . '/src/ObjectSettings/ObjectSettingsFormGUI.php',

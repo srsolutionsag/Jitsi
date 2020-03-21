@@ -1,6 +1,7 @@
 <?php
 
 use srag\DIC\Jitsi\DICTrait;
+use srag\Plugins\Jitsi\Jitsi\Config;
 use srag\Plugins\Jitsi\ObjectSettings\ObjectSettingsFormGUI;
 use srag\Plugins\Jitsi\Utils\JitsiTrait;
 
@@ -156,14 +157,14 @@ class ilObjJitsiGUI extends ilObjectPluginGUI
     protected function showContents()/*: void*/
     {
         self::dic()->tabs()->activateTab(self::TAB_SHOW_CONTENTS);
-
+        $id = $this->object->getObjectSettings()->getJitsiId();
         $html = "<script src='https://meet.jit.si/external_api.js'></script>";
         $html .= "<div id='jitsi_meeting'></div>";
         $html .= "<script>
 
 const domain = 'meet.jit.si';
 const options = {
-    roomName: 'randomfsx',
+    roomName: '$id',
     // width: 100%,
     interfaceConfigOverwrite: { 
     	SHOW_JITSI_WATERMARK: false,

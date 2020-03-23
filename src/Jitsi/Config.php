@@ -8,37 +8,45 @@ namespace srag\Plugins\Jitsi\Jitsi;
  */
 class Config implements \JsonSerializable
 {
-    private $room_name = '';
+    private $roomName = '';
 
-    private $parent_html_node = '#jitsi_meeting';
+    private $configOverwrite = [
+        'desktopSharingChromeSources' => ['screen']
+    ];
 
     private $interfaceConfigOverwrite = [
-        'SHOW_JITSI_WATERMARK'      => false,
-        'JITSI_WATERMARK_LINK'      => '',
-        'SHOW_WATERMARK_FOR_GUESTS' => false,
-        'TOOLBAR_BUTTONS'           => [
+        'SHOW_JITSI_WATERMARK'            => false,
+        'JITSI_WATERMARK_LINK'            => '',
+        'SHOW_WATERMARK_FOR_GUESTS'       => false,
+        'RECENT_LIST_ENABLED'             => false,
+        'SUPPORT_URL'                     => '',
+        'TOOLBAR_BUTTONS'                 => [
             'microphone',
             'camera',
-            'closedcaptions',
+            //            'closedcaptions',
             'desktop',
             'fullscreen',
             'fodeviceselection',
             'hangup',
-            'profile',
-            'info',
+            //            'profile',
+            //            'info',
             'chat',
-            'livestreaming',
+            //            'livestreaming',
             'etherpad',
             'settings',
             'raisehand',
-            'videoquality',
-            'shortcuts',
+            //            'videoquality',
+            //            'shortcuts',
             'tileview',
-            'mute-everyone'
+            //            'mute-everyone'
         ],
-        'SETTINGS_SECTIONS'         => ['devices', 'moderator'],
-        'DISABLE_RINGING'           => true,
-        'MOBILE_APP_PROMO'          => false
+        'SETTINGS_SECTIONS'               => ['devices', 'moderator'],
+        'DISABLE_RINGING'                 => true,
+        'MOBILE_APP_PROMO'                => false,
+        'DISABLE_TRANSCRIPTION_SUBTITLES' => true,
+        'VERTICAL_FILMSTRIP'              => false,
+        'LOCAL_THUMBNAIL_RATIO'           => 16 / 9,
+        'REMOTE_THUMBNAIL_RATIO'          => 16 / 9
     ];
 
     private $height = 800;
@@ -49,11 +57,10 @@ class Config implements \JsonSerializable
      * @param string $parent_html_node
      * @param int    $height
      */
-    public function __construct(string $room_name, string $parent_html_node, int $height)
+    public function __construct(string $room_name, int $height)
     {
-        $this->room_name        = $room_name;
-        $this->parent_html_node = $parent_html_node;
-        $this->height           = $height;
+        $this->roomName = $room_name;
+        $this->height   = $height;
     }
 
     public function jsonSerialize()
@@ -64,8 +71,7 @@ class Config implements \JsonSerializable
 
         }
 
-        $json_encode = json_encode($data, JSON_FORCE_OBJECT);
-        return $json_encode;
+        return json_encode((object) $data, JSON_NUMERIC_CHECK);
     }
 
 }

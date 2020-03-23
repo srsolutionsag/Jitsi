@@ -1,7 +1,6 @@
 <?php
 
 use srag\DIC\Jitsi\DICTrait;
-use srag\Plugins\Jitsi\Jitsi\Config;
 use srag\Plugins\Jitsi\ObjectSettings\ObjectSettingsFormGUI;
 use srag\Plugins\Jitsi\Utils\JitsiTrait;
 
@@ -24,7 +23,7 @@ class ilObjJitsiGUI extends ilObjectPluginGUI
     use DICTrait;
     use JitsiTrait;
     const PLUGIN_CLASS_NAME = ilJitsiPlugin::class;
-    const CMD_MANAGE_CONTENTS = "manageContents";
+//    const CMD_MANAGE_CONTENTS = "manageContents";
     const CMD_PERMISSIONS = "perm";
     const CMD_SETTINGS = "settings";
     const CMD_SETTINGS_STORE = "settingsStore";
@@ -77,7 +76,7 @@ class ilObjJitsiGUI extends ilObjectPluginGUI
                         $this->{$cmd}();
                         break;
 
-                    case self::CMD_MANAGE_CONTENTS:
+//                    case self::CMD_MANAGE_CONTENTS:
                     case self::CMD_SETTINGS:
                     case self::CMD_SETTINGS_STORE:
                         // Write commands
@@ -157,36 +156,26 @@ class ilObjJitsiGUI extends ilObjectPluginGUI
     protected function showContents()/*: void*/
     {
         self::dic()->tabs()->activateTab(self::TAB_SHOW_CONTENTS);
-        $id = $this->object->getObjectSettings()->getJitsiId();
+
+        $id     = $this->object->getObjectSettings()->getJitsiId();
+        $config = new srag\Plugins\Jitsi\Jitsi\Config($id, 800);
+        $username = self::dic()->user()->getFullname();
+        $title = $this->object->getTitle();
         $html = "<script src='https://meet.jit.si/external_api.js'></script>";
         $html .= "<div id='jitsi_meeting'></div>";
         $html .= "<script>
+             const domain = 'meet.jit.si';
+             const options = JSON.parse('{$config->jsonSerialize()}');
+                    options.parentNode = document.querySelector('#jitsi_meeting');
+                    console.log('FSX*********************************');
+                    console.log(options);
+             const api = new JitsiMeetExternalAPI(domain, options);
 
-const domain = 'meet.jit.si';
-const options = {
-    roomName: '$id',
-    // width: 100%,
-    interfaceConfigOverwrite: { 
-    	SHOW_JITSI_WATERMARK: false,
-    	JITSI_WATERMARK_LINK: '',
-    	SHOW_WATERMARK_FOR_GUESTS: false,
-    	TOOLBAR_BUTTONS: [
-        'microphone', 'camera', 'closedcaptions', 'desktop', 'fullscreen',
-        'fodeviceselection', 'hangup', 'profile', 'info', 'chat', 
-        'livestreaming', 'etherpad', 'settings', 'raisehand',
-        'videoquality',  'shortcuts',
-        'tileview', 'mute-everyone'
-    ],	
-    SETTINGS_SECTIONS: [ 'devices',  'moderator' ],
-    DISABLE_RINGING: true,
-    	},
-    height: 800,
-    parentNode: document.querySelector('#jitsi_meeting')
-};
-const api = new JitsiMeetExternalAPI(domain, options);
-
-
-
+             api.executeCommand('displayName', '{$username}');
+             api.executeCommand('password', 'The Password');
+             api.executeCommand('subject', '{$title}');
+             api.executeCommand('toggleTileView');
+             api.executeCommand('toggleAudio');
 </script>";
         $this->show($html);
     }
@@ -242,8 +231,8 @@ const api = new JitsiMeetExternalAPI(domain, options);
                                                                                                                                        ->getLinkTarget($this, self::CMD_SHOW_CONTENTS));
 
         if (ilObjJitsiAccess::hasWriteAccess()) {
-            self::dic()->tabs()->addTab(self::TAB_CONTENTS, self::plugin()->translate("manage_contents", self::LANG_MODULE_OBJECT), self::dic()
-                                                                                                                                        ->ctrl()->getLinkTarget($this, self::CMD_MANAGE_CONTENTS));
+//            self::dic()->tabs()->addTab(self::TAB_CONTENTS, self::plugin()->translate("manage_contents", self::LANG_MODULE_OBJECT), self::dic()
+//                                                                                                                                        ->ctrl()->getLinkTarget($this, self::CMD_MANAGE_CONTENTS));
 
             self::dic()->tabs()->addTab(self::TAB_SETTINGS, self::plugin()->translate("settings", self::LANG_MODULE_SETTINGS), self::dic()->ctrl()
                                                                                                                                    ->getLinkTarget($this, self::CMD_SETTINGS));
@@ -266,7 +255,7 @@ const api = new JitsiMeetExternalAPI(domain, options);
     public static function getStartCmd() : string
     {
         if (ilObjJitsiAccess::hasWriteAccess()) {
-            return self::CMD_MANAGE_CONTENTS;
+            return self::CMD_SETTINGS;
         } else {
             return self::CMD_SHOW_CONTENTS;
         }

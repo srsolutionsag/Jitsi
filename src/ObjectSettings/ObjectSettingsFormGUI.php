@@ -68,7 +68,7 @@ class ObjectSettingsFormGUI extends PropertyFormGUI
     {
         $this->addCommandButton(ilObjJitsiGUI::CMD_SETTINGS_STORE, self::plugin()->translate("save", self::LANG_MODULE));
 
-        $this->addCommandButton(ilObjJitsiGUI::CMD_MANAGE_CONTENTS, self::plugin()->translate("cancel", self::LANG_MODULE));
+        $this->addCommandButton(ilObjJitsiGUI::CMD_SETTINGS, self::plugin()->translate("cancel", self::LANG_MODULE));
     }
 
 
@@ -78,15 +78,15 @@ class ObjectSettingsFormGUI extends PropertyFormGUI
     protected function initFields()/*: void*/
     {
         $this->fields = [
-            "title"       => [
+            'title' => [
                 self::PROPERTY_CLASS    => ilTextInputGUI::class,
                 self::PROPERTY_REQUIRED => true
             ],
-            "description" => [
+            'description' => [
                 self::PROPERTY_CLASS    => ilTextAreaInputGUI::class,
                 self::PROPERTY_REQUIRED => false
             ],
-            "online"      => [
+            'online' => [
                 self::PROPERTY_CLASS => ilCheckboxInputGUI::class
             ]
         ];
@@ -107,7 +107,7 @@ class ObjectSettingsFormGUI extends PropertyFormGUI
      */
     protected function initTitle()/*: void*/
     {
-        $this->setTitle(self::plugin()->translate("settings", self::LANG_MODULE));
+        $this->setTitle(self::plugin()->translate('settings', self::LANG_MODULE));
     }
 
 

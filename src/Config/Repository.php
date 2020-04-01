@@ -5,7 +5,6 @@ namespace srag\Plugins\Jitsi\Config;
 use ilJitsiPlugin;
 use srag\ActiveRecordConfig\Jitsi\Config\AbstractFactory;
 use srag\ActiveRecordConfig\Jitsi\Config\AbstractRepository;
-use srag\ActiveRecordConfig\Jitsi\Config\Config;
 use srag\Plugins\Jitsi\Utils\JitsiTrait;
 
 /**
@@ -59,7 +58,7 @@ final class Repository extends AbstractRepository
      */
     protected function getTableName() : string
     {
-        return ilJitsiPlugin::PLUGIN_ID . "_config";
+        return ilJitsiPlugin::PLUGIN_ID . '_config';
     }
 
     /**
@@ -68,7 +67,8 @@ final class Repository extends AbstractRepository
     protected function getFields() : array
     {
         return [
-            ConfigFormGUI::JITSI_URL => Config::TYPE_STRING
+//            ConfigFormGUI::JITSI_URL => Config::TYPE_STRING,
+//            ConfigFormGUI::LIST_TITLE => Config::TYPE_STRING,
         ];
     }
 }

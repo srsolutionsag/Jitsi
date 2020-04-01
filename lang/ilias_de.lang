@@ -1,8 +1,8 @@
-obj_xjit#:#Jitsi
+obj_xjit#:#Jitsi Videoraum
 obj_xjit_duplicate#:#Jitsi kopieren
-objs_xjit#:#Jitsi's
+objs_xjit#:#Jitsi Videoräume
 objs_xjit_duplicate#:#Jitsi's kopieren
-rbac_create_xjit#:#Jitsi anlegen
+rbac_create_xjit#:#Jitsi Videoraum anlegen
 xjit_add#:#Hinzufügen
 xjit_delete#:#Löschen
 xjit_edit_permission#:#Rechte bearbeiten

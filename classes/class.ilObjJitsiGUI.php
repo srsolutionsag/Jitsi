@@ -1,5 +1,6 @@
 <?php
 
+use ILIAS\Data\URI;
 use srag\DIC\Jitsi\DICTrait;
 use srag\Plugins\Jitsi\ObjectSettings\ObjectSettingsFormGUI;
 use srag\Plugins\Jitsi\Utils\JitsiTrait;
@@ -155,29 +156,29 @@ class ilObjJitsiGUI extends ilObjectPluginGUI
      */
     protected function showContents()/*: void*/
     {
-        self::dic()->tabs()->activateTab(self::TAB_SHOW_CONTENTS);
+        $DIC = self::dic();
 
+        $DIC->tabs()->activateTab(self::TAB_SHOW_CONTENTS);
+        $tpl = self::plugin()->getPluginObject()->getTemplate('tpl.meeting.html');
+
+        // Menu
+        $tpl->setVariable('MENU', ''); // Currently no menu
+
+        // Domain
+        $uri = new URI('https://meet.jit.si/');
+        $tpl->setVariable('JITSI_DOMAIN', $uri->authority());
+        $tpl->setVariable('JITSI_DOMAIN_SCHEMA', $uri->schema());
+
+        // Config and Start
         $id     = $this->object->getObjectSettings()->getJitsiId();
-        $config = new srag\Plugins\Jitsi\Jitsi\Config($id, 800);
-        $username = self::dic()->user()->getFullname();
-        $title = $this->object->getTitle();
-        $html = "<script src='https://meet.jit.si/external_api.js'></script>";
-        $html .= "<div id='jitsi_meeting'></div>";
-        $html .= "<script>
-             const domain = 'meet.jit.si';
-             const options = JSON.parse('{$config->jsonSerialize()}');
-                    options.parentNode = document.querySelector('#jitsi_meeting');
-                    console.log('FSX*********************************');
-                    console.log(options);
-             const api = new JitsiMeetExternalAPI(domain, options);
+        $config = new srag\Plugins\Jitsi\Jitsi\Base($uri->authority(), $id, 800);
+        $config->getParticipant()->setDisplayName($DIC->user()->getFullname());
+        $config->getParticipant()->setModerator(ilObjJitsiAccess::hasWriteAccess());
+        $config->setRoomName($this->object->getTitle());
+        $config->setPassword(uniqid('pw', true));
 
-             api.executeCommand('displayName', '{$username}');
-             api.executeCommand('password', 'The Password');
-             api.executeCommand('subject', '{$title}');
-             api.executeCommand('toggleTileView');
-             api.executeCommand('toggleAudio');
-</script>";
-        $this->show($html);
+        $tpl->setVariable('JITSI_SETTINGS', $config->jsonSerialize());
+        $this->show($tpl->get());
     }
 
     /**
@@ -255,10 +256,9 @@ class ilObjJitsiGUI extends ilObjectPluginGUI
     public static function getStartCmd() : string
     {
         if (ilObjJitsiAccess::hasWriteAccess()) {
-            return self::CMD_SETTINGS;
-        } else {
             return self::CMD_SHOW_CONTENTS;
         }
+        return self::CMD_SHOW_CONTENTS;
     }
 
     /**

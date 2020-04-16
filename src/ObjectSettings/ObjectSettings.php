@@ -162,7 +162,8 @@ class ObjectSettings extends ActiveRecord
 
     public function generareJitsiId(Repository $setting)
     {
-        $uniqid = uniqid('jit', true);
+        //$uniqid = uniqid('jit', true);
+        $uniqid = str_pad(rand(0,'9'.round(microtime(true))),11, "0", STR_PAD_LEFT);
         $this->setJitsiId($uniqid);
         $setting->storeObjectSettings($this);
     }

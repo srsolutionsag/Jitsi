@@ -20,8 +20,18 @@ class ObjectSettings extends ActiveRecord
 
     use DICTrait;
     use JitsiTrait;
+
     const TABLE_NAME = "rep_robj_xjit_set";
     const PLUGIN_CLASS_NAME = ilJitsiPlugin::class;
+
+    /**
+     * @param int $length
+     * @return false|string
+     */
+    public static function randomString(int $length) : string
+    {
+        return substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
+    }
 
     /**
      * @inheritDoc
@@ -162,8 +172,7 @@ class ObjectSettings extends ActiveRecord
 
     public function generareJitsiId(Repository $setting)
     {
-        //$uniqid = uniqid('jit', true);
-        $uniqid = str_pad(rand(0,'9'.round(microtime(true))),11, "0", STR_PAD_LEFT);
+        $uniqid = self::randomString(25);
         $this->setJitsiId($uniqid);
         $setting->storeObjectSettings($this);
     }

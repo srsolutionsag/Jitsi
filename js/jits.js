@@ -3,6 +3,7 @@ var il;
     var Jitsi;
     (function (Jitsi) {
         var ApiWrapper = /** @class */ (function () {
+            // @ts-ignore
             function ApiWrapper(api, participant) {
                 this.api = api;
                 this.participant = participant;
@@ -28,6 +29,9 @@ var il;
             };
             ApiWrapper.prototype.muteAll = function () {
             };
+            ApiWrapper.prototype.setUserName = function (username) {
+                this.api.executeCommand('displayName', username);
+            };
             ApiWrapper.prototype.toggleAudio = function () {
                 this.api.executeCommand('toggleAudio');
             };
@@ -52,6 +56,7 @@ var il;
             ApiWrapper.prototype.setRoomName = function (room_name) {
                 this.api.executeCommand('subject', room_name);
             };
+            // @ts-ignore
             ApiWrapper.prototype.raw = function () {
                 return this.api;
             };
@@ -77,8 +82,8 @@ var il;
             // @ts-ignore
             var api = new JitsiMeetExternalAPI(domain, options);
             var participant = base_configuration['participant'];
-            api.executeCommand('displayName', participant['displayName']);
             api_wapper = new ApiWrapper(api, participant);
+            api_wapper.setUserName(participant['displayName']);
             api_wapper.toggleAudio();
             if (participant['moderator'] === true) {
                 console.log('moderator');

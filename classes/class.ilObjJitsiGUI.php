@@ -2,6 +2,7 @@
 
 use ILIAS\Data\URI;
 use srag\DIC\Jitsi\DICTrait;
+use srag\Plugins\Jitsi\ObjectSettings\ObjectSettings;
 use srag\Plugins\Jitsi\ObjectSettings\ObjectSettingsFormGUI;
 use srag\Plugins\Jitsi\Utils\JitsiTrait;
 
@@ -175,7 +176,7 @@ class ilObjJitsiGUI extends ilObjectPluginGUI
         $config->getParticipant()->setDisplayName($DIC->user()->getFullname());
         $config->getParticipant()->setModerator(ilObjJitsiAccess::hasWriteAccess());
         $config->setRoomName($this->object->getTitle());
-        $config->setPassword(uniqid('pw', true));
+        $config->setPassword(ObjectSettings::randomString(8));
 
         $tpl->setVariable('JITSI_SETTINGS', $config->jsonSerialize());
         $this->show($tpl->get());

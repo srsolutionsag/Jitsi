@@ -10,12 +10,12 @@ namespace srag\Plugins\Jitsi\Jitsi;
 class ConfigOverwrite extends AbstractJasonable
 {
     public $desktopSharingChromeSources = ['screen'];
-//    public $startAudioOnly = true;
     public $startWithVideoMuted = true;
-    public $startWithAudioMuted = true;
+    public $startWithAudioMuted = false;
     public $enableWelcomePage = false;
     public $enableClosePage = false;
     public $prejoinPageEnabled = true;
     public $defaultLanguage = 'de';
     public $disableRemoteMute = false;
+    public $analytics = [];
 }

@@ -8,6 +8,7 @@ namespace il {
             public audioMuted: false;
             public videoMuted: false;
 
+            // @ts-ignore
             constructor(api: JitsiMeetExternalAPI, participant: object) {
                 this.api = api;
                 this.participant = participant;
@@ -36,6 +37,10 @@ namespace il {
 
             muteAll(): void {
 
+            }
+
+            setUserName(username: string): void {
+                this.api.executeCommand('displayName', username);
             }
 
             toggleAudio(): void {
@@ -69,6 +74,7 @@ namespace il {
                 this.api.executeCommand('subject', room_name);
             }
 
+            // @ts-ignore
             raw(): JitsiMeetExternalAPI {
                 return this.api;
             }
@@ -96,10 +102,8 @@ namespace il {
             // @ts-ignore
             let api = new JitsiMeetExternalAPI(domain, options);
             let participant = base_configuration['participant'];
-            api.executeCommand('displayName', participant['displayName']);
-
             api_wapper = new ApiWrapper(api, participant);
-
+            api_wapper.setUserName(participant['displayName']);
             api_wapper.toggleAudio();
 
             if (participant['moderator'] === true) {

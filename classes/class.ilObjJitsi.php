@@ -57,7 +57,7 @@ class ilObjJitsi extends ilObjectPlugin
     public function doRead()/*: void*/
     {
         $this->object_settings = self::jitsi()->objectSettings()->getObjectSettingsById(intval($this->id));
-        if (!$this->object_settings->getJitsiId()) {
+        if (strlen($this->object_settings->getJitsiId()) < 10) {
             $this->object_settings->generareJitsiId(self::jitsi()->objectSettings());
         }
     }

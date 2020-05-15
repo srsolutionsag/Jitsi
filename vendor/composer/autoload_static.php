@@ -169,6 +169,7 @@ class ComposerStaticInita41e30d188d95a08354b9fd005c8fc45
         'srag\\Plugins\\Jitsi\\Jitsi\\ConfigOverwrite' => __DIR__ . '/../..' . '/src/Jitsi/ConfigOverwrite.php',
         'srag\\Plugins\\Jitsi\\Jitsi\\InterfaceConfigOverwrite' => __DIR__ . '/../..' . '/src/Jitsi/InterfaceConfigOverwrite.php',
         'srag\\Plugins\\Jitsi\\Jitsi\\Participant' => __DIR__ . '/../..' . '/src/Jitsi/Participant.php',
+        'srag\\Plugins\\Jitsi\\Jitsi\\URI' => __DIR__ . '/../..' . '/src/Jitsi/URI.php',
         'srag\\Plugins\\Jitsi\\ObjectSettings\\Factory' => __DIR__ . '/../..' . '/src/ObjectSettings/Factory.php',
         'srag\\Plugins\\Jitsi\\ObjectSettings\\ObjectSettings' => __DIR__ . '/../..' . '/src/ObjectSettings/ObjectSettings.php',
         'srag\\Plugins\\Jitsi\\ObjectSettings\\ObjectSettingsFormGUI' => __DIR__ . '/../..' . '/src/ObjectSettings/ObjectSettingsFormGUI.php',

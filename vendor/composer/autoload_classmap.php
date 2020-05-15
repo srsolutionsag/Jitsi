@@ -129,6 +129,7 @@ return array(
     'srag\\Plugins\\Jitsi\\Jitsi\\ConfigOverwrite' => $baseDir . '/src/Jitsi/ConfigOverwrite.php',
     'srag\\Plugins\\Jitsi\\Jitsi\\InterfaceConfigOverwrite' => $baseDir . '/src/Jitsi/InterfaceConfigOverwrite.php',
     'srag\\Plugins\\Jitsi\\Jitsi\\Participant' => $baseDir . '/src/Jitsi/Participant.php',
+    'srag\\Plugins\\Jitsi\\Jitsi\\URI' => $baseDir . '/src/Jitsi/URI.php',
     'srag\\Plugins\\Jitsi\\ObjectSettings\\Factory' => $baseDir . '/src/ObjectSettings/Factory.php',
     'srag\\Plugins\\Jitsi\\ObjectSettings\\ObjectSettings' => $baseDir . '/src/ObjectSettings/ObjectSettings.php',
     'srag\\Plugins\\Jitsi\\ObjectSettings\\ObjectSettingsFormGUI' => $baseDir . '/src/ObjectSettings/ObjectSettingsFormGUI.php',

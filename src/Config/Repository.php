@@ -5,6 +5,7 @@ namespace srag\Plugins\Jitsi\Config;
 use ilJitsiPlugin;
 use srag\ActiveRecordConfig\Jitsi\Config\AbstractFactory;
 use srag\ActiveRecordConfig\Jitsi\Config\AbstractRepository;
+use srag\ActiveRecordConfig\Jitsi\Config\Config;
 use srag\Plugins\Jitsi\Utils\JitsiTrait;
 
 /**
@@ -18,6 +19,7 @@ final class Repository extends AbstractRepository
 {
 
     use JitsiTrait;
+
     const PLUGIN_CLASS_NAME = ilJitsiPlugin::class;
     /**
      * @var self
@@ -67,8 +69,8 @@ final class Repository extends AbstractRepository
     protected function getFields() : array
     {
         return [
-//            ConfigFormGUI::JITSI_URL => Config::TYPE_STRING,
-//            ConfigFormGUI::LIST_TITLE => Config::TYPE_STRING,
+            ConfigFormGUI::JITSI_URL => Config::TYPE_STRING,
+            //            ConfigFormGUI::LIST_TITLE => Config::TYPE_STRING,
         ];
     }
 }

@@ -1,7 +1,8 @@
 <?php
 
-use ILIAS\Data\URI;
 use srag\DIC\Jitsi\DICTrait;
+use srag\Plugins\Jitsi\Config\ConfigFormGUI;
+use srag\Plugins\Jitsi\Jitsi\URI;
 use srag\Plugins\Jitsi\ObjectSettings\ObjectSettings;
 use srag\Plugins\Jitsi\ObjectSettings\ObjectSettingsFormGUI;
 use srag\Plugins\Jitsi\Utils\JitsiTrait;
@@ -24,6 +25,7 @@ class ilObjJitsiGUI extends ilObjectPluginGUI
 
     use DICTrait;
     use JitsiTrait;
+
     const PLUGIN_CLASS_NAME = ilJitsiPlugin::class;
 //    const CMD_MANAGE_CONTENTS = "manageContents";
     const CMD_PERMISSIONS = "perm";
@@ -166,13 +168,14 @@ class ilObjJitsiGUI extends ilObjectPluginGUI
         $tpl->setVariable('MENU', ''); // Currently no menu
 
         // Domain
-        $uri = new URI('https://meet.jit.si/');
-        $tpl->setVariable('JITSI_DOMAIN', $uri->authority());
-        $tpl->setVariable('JITSI_DOMAIN_SCHEMA', $uri->schema());
+        $uri_from_config = self::jitsi()->config()->getValue(ConfigFormGUI::JITSI_URL) ?? 'https://meet.jit.si/';
+        $uri             = new URI($uri_from_config);
+        $tpl->setVariable('JITSI_DOMAIN', $uri->getAuthority());
+        $tpl->setVariable('JITSI_DOMAIN_SCHEMA', $uri->getSchema());
 
         // Config and Start
         $id     = $this->object->getObjectSettings()->getJitsiId();
-        $config = new srag\Plugins\Jitsi\Jitsi\Base($uri->authority(), $id, 800);
+        $config = new srag\Plugins\Jitsi\Jitsi\Base($uri->getAuthority(), $id, 800);
         $config->getParticipant()->setDisplayName($DIC->user()->getFullname());
         $config->getParticipant()->setModerator(ilObjJitsiAccess::hasWriteAccess());
         $config->setRoomName($this->object->getTitle());

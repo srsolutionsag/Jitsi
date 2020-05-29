@@ -4,6 +4,7 @@ namespace srag\Plugins\Jitsi\Config;
 
 use ilJitsiConfigGUI;
 use ilJitsiPlugin;
+use ilTextInputGUI;
 use srag\CustomInputGUIs\Jitsi\PropertyFormGUI\PropertyFormGUI;
 use srag\Plugins\Jitsi\Utils\JitsiTrait;
 
@@ -18,6 +19,7 @@ class ConfigFormGUI extends PropertyFormGUI
 {
 
     use JitsiTrait;
+
     const PLUGIN_CLASS_NAME = ilJitsiPlugin::class;
     const LANG_MODULE = ilJitsiConfigGUI::LANG_MODULE;
     const JITSI_URL = 'jitsi_url';
@@ -57,14 +59,14 @@ class ConfigFormGUI extends PropertyFormGUI
     protected function initFields()/*: void*/
     {
         $this->fields = [
-//            self::JITSI_URL => [
-//                self::PROPERTY_CLASS    => ilTextInputGUI::class,
-//                self::PROPERTY_REQUIRED => true
-//            ],
-//            self::LIST_TITLE => [
-//                self::PROPERTY_CLASS    => ilTextInputGUI::class,
-//                self::PROPERTY_REQUIRED => true,
-//            ],
+            self::JITSI_URL => [
+                self::PROPERTY_CLASS    => ilTextInputGUI::class,
+                self::PROPERTY_REQUIRED => true
+            ],
+            //            self::LIST_TITLE => [
+            //                self::PROPERTY_CLASS    => ilTextInputGUI::class,
+            //                self::PROPERTY_REQUIRED => true,
+            //            ],
         ];
     }
 

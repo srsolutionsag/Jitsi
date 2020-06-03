@@ -107,4 +107,10 @@ class ilObjJitsiListGUI extends ilObjectPluginListGUI
     {
         $this->setType(ilJitsiPlugin::PLUGIN_ID);
     }
+
+    public function getCommandFrame($a_cmd)
+    {
+        return '_blank';
+    }
+
 }

@@ -69,7 +69,8 @@ final class Repository extends AbstractRepository
     protected function getFields() : array
     {
         return [
-            ConfigFormGUI::JITSI_URL => Config::TYPE_STRING,
+            ConfigFormGUI::JITSI_URL       => Config::TYPE_STRING,
+            ConfigFormGUI::OPEN_IN_NEW_TAB => Config::TYPE_BOOLEAN,
             //            ConfigFormGUI::LIST_TITLE => Config::TYPE_STRING,
         ];
     }

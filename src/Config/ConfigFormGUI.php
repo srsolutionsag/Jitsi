@@ -24,6 +24,7 @@ class ConfigFormGUI extends PropertyFormGUI
     const LANG_MODULE = ilJitsiConfigGUI::LANG_MODULE;
     const JITSI_URL = 'jitsi_url';
     const LIST_TITLE = 'list_title';
+    const OPEN_IN_NEW_TAB = 'open_in_tab';
 
     /**
      * ConfigFormGUI constructor
@@ -59,9 +60,13 @@ class ConfigFormGUI extends PropertyFormGUI
     protected function initFields()/*: void*/
     {
         $this->fields = [
-            self::JITSI_URL => [
+            self::JITSI_URL       => [
                 self::PROPERTY_CLASS    => ilTextInputGUI::class,
                 self::PROPERTY_REQUIRED => true
+            ],
+            self::OPEN_IN_NEW_TAB => [
+                self::PROPERTY_CLASS    => \ilCheckboxInputGUI::class,
+                self::PROPERTY_REQUIRED => false
             ],
             //            self::LIST_TITLE => [
             //                self::PROPERTY_CLASS    => ilTextInputGUI::class,

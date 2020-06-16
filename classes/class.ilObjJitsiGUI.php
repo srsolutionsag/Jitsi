@@ -270,7 +270,7 @@ class ilObjJitsiGUI extends ilObjectPluginGUI
      */
     public function getAfterCreationCmd() : string
     {
-        return self::getStartCmd();
+        return self::CMD_SETTINGS;
     }
 
     /**
